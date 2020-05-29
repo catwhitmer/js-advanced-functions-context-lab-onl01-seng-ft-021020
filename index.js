@@ -49,6 +49,12 @@ let hoursWorkedOnDate = function(date) {
 let wagesEarnedOnDate = function(date) {
   return hoursWorkedOnDate.call(this, date) * this.payPerHour;
 }
+
+let calculatePayroll = function(arrayOfEmployeeRecords){
+  return arrayOfEmployeeRecords.reduce(function(memo, rec){
+      return memo + allWagesFor.call(rec)
+  }, 0)
+}
 /*
  We're giving you this function. Take a look at it, you might see some usage
  that's new and different. That's because we're avoiding a well-known, but
