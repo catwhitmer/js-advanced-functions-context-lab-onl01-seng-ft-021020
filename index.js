@@ -1,5 +1,54 @@
-/* Your Code Here */
+/* Your Code Here*/
+let createEmployeeRecord = function(employeeData) {
+  return {
+    firstName: employeeData[0],
+    familyName: employeeData[1],
+    title: employeeData[2],
+    payPerHour: employeeData[3],
+    timeInEvents: [],
+    timeOutEvents: []
+  }
+}
 
+let createEmployeeRecords = function(employeeDatum) {
+  return employeeDatum.map(function(employeeData) {
+    return createEmployeeRecord(employeeData);
+  });
+}
+
+let createTimeInEvent = function(clockIn) {
+  let [date, hour] = clockIn.split(' ');
+
+  this.timeInEvents.push({
+    type: "TimeIn",
+    hour: parseInt(hour, 10),
+    date
+  })
+
+  return this
+}
+
+let createTimeOutEvent = function(clockOut) {
+  let [date, hour] = clockOut.split(' ');
+
+  this.timeOutEvents.push({
+    type: "TimeOut",
+    hour: parseInt(hour, 10),
+    date
+  })
+
+  return this
+}
+
+let hoursWorkedOnDate = function(date) {
+  let checkIn = this.timeInEvents.find(checkIn => checkIn.date === date);
+  let checkOut = this.timeOutEvents.find(checkOut => checkOut.date === date);
+  return (checkOut.hour - checkIn.hour)/100
+}
+
+let wagesEarnedOnDate = function(date) {
+  return hoursWorkedOnDate.call(this, date) * this.payPerHour;
+}
 /*
  We're giving you this function. Take a look at it, you might see some usage
  that's new and different. That's because we're avoiding a well-known, but
